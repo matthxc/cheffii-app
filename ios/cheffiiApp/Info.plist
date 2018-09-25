@@ -67,6 +67,10 @@
 		<string>Montserrat-ExtraLight.ttf</string>
 		<string>Montserrat-Regular_Bold.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
+		<string>Feather.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
 	</array>
 </dict>
 </plist>
