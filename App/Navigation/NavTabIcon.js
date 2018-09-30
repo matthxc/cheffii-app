@@ -1,33 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
+import styled from 'styled-components';
+
+const CustomIcon = styled(Icon)`
+  color: ${props => props.color};
+`;
 
 const NavTabIcon = ({ tintColor, testIDTabName, iconName, iconType }) => (
-  <View
-    testID={testIDTabName}
-    style={{
-      width: 25,
-      height: 25,
-      padding: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <Icon
-      name={iconName}
-      type={iconType}
-      style={[
-        {
-          tintColor,
-        },
-      ]}
-    />
+  <View testID={testIDTabName}>
+    <CustomIcon name={iconName} type={iconType} color={tintColor} />
   </View>
 );
 
 NavTabIcon.defaultProps = {
-  iconType: 'Entypo',
+  iconType: 'Ionicons',
 };
 
 NavTabIcon.propTypes = {

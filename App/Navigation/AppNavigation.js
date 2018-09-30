@@ -1,11 +1,11 @@
 import React from 'react';
-import { SwitchNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { View } from 'react-native';
 
 import colors from 'Themes/Colors';
 import LaunchScreen from 'Containers/LaunchScreen';
-import NavTabIcon from 'Components/NavTabIcon';
-import TabHeaderLogo from 'Components/TabHeaderLogo';
+import NavTabIcon from './NavTabIcon';
+import TabHeaderLogo from './TabHeaderLogo';
 
 import styles from './Styles/NavigationStyles';
 
@@ -49,6 +49,7 @@ const MainApp = TabNavigator(
             tintColor={tintColor}
             testIDTabName="microphoneTab"
             iconName="microphone"
+            iconType="FontAwesome"
           />
         ),
       },
@@ -62,41 +63,50 @@ const MainApp = TabNavigator(
             tintColor={tintColor}
             testIDTabName="addManuallyTab"
             iconName="plus"
-            type="FontAwesome"
+            iconType="Entypo"
           />
         ),
       },
     },
   },
   {
-    initialRouteName: 'home',
     tabBarPosition: 'bottom',
-    swipeEnabled: false,
     headerMode: 'screen',
+    initialRouteName: 'home',
     lazy: true,
     tabBarOptions: {
-      activeTintColor: colors.primary,
-      inactiveBackgroundColor: colors.secondary,
+      activeTintColor: 'white',
+      inactiveBackgroundColor: colors.primary,
       inactiveTintColor: 'white',
-      activeBackgroundColor: colors.secondary,
+      activeBackgroundColor: colors.primary,
       labelStyle: {
-        color: colors.primary,
+        color: 'white',
+      },
+      iconStyle: {
+        height: 35,
       },
       showLabel: false,
       showIcon: true,
       style: {
-        backgroundColor: colors.secondary,
-      },
-      indicatorStyle: {
         backgroundColor: colors.primary,
       },
-      // eslint-disable-next-line
-      navigationOptions: ({ navigation }) => ({
-        header: null,
-        headerTitle: <TabHeaderLogo />,
-        headerTintColor: colors.primary,
+      indicatorStyle: {
+        backgroundColor: 'white',
+        height: 3,
+      },
+    },
+  },
+);
+
+const PrimaryNav = StackNavigator(
+  {
+    main: {
+      screen: MainApp,
+      navigationOptions: {
+        header: <TabHeaderLogo />,
+        headerTintColor: 'white',
         headerStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'white',
         },
         headerLeft: <View />,
         headerRight: <View />,
@@ -104,22 +114,12 @@ const MainApp = TabNavigator(
           alignItems: 'center',
           justifyContent: 'center',
         },
-      }),
+      },
     },
-  },
-);
-
-const PrimaryNav = SwitchNavigator(
-  {
-    main: MainApp,
   },
   {
     // Default config for all screens
-    headerMode: 'none',
     initialRouteName: 'main',
-    navigationOptions: {
-      headerStyle: styles.header,
-    },
   },
 );
 
