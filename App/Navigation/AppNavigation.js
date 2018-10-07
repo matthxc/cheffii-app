@@ -102,24 +102,14 @@ const PrimaryNav = StackNavigator(
   {
     main: {
       screen: MainApp,
-      navigationOptions: {
-        header: <TabHeaderLogo />,
-        headerTintColor: 'white',
-        headerStyle: {
-          backgroundColor: 'white',
-        },
-        headerLeft: <View />,
-        headerRight: <View />,
-        headerTitleStyle: {
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-      },
     },
   },
   {
     // Default config for all screens
     initialRouteName: 'main',
+    navigationOptions: {
+      headerTitle: <TabHeaderLogo />,
+    },
   },
 );
 

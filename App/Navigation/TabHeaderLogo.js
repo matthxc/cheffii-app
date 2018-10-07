@@ -6,6 +6,7 @@ import Colors from 'Themes/Colors';
 
 const styles = StyleSheet.create({
   headerLogo: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.primary,
