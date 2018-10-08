@@ -1,13 +1,18 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { View } from 'react-native';
 
+// Theme
 import colors from 'Themes/Colors';
+
+// Screens
 import LaunchScreen from 'Containers/LaunchScreen';
+import CameraScreen from 'Containers/Camera';
+
+// Components
 import NavTabIcon from './NavTabIcon';
 import TabHeaderLogo from './TabHeaderLogo';
 
-import styles from './Styles/NavigationStyles';
+// Screens
 
 // Manifest of possible screens
 
@@ -28,7 +33,7 @@ const MainApp = TabNavigator(
       },
     },
     camera: {
-      screen: LaunchScreen,
+      screen: CameraScreen,
       navigationOptions: {
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ tintColor }) => (
