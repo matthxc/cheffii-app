@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CameraComponent from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import { Button } from 'native-base';
 
 export const Container = styled.View`
@@ -8,7 +8,7 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const Camera = styled(CameraComponent)`
+export const Camera = styled(RNCamera)`
   flex: 1;
   justify-content: center;
   align-items: center;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'native-base';
+import { Text, Spinner } from 'native-base';
 
 // Styles
 import {
@@ -9,25 +9,42 @@ import {
 } from './styles/takePictureScreenStyles';
 
 class TakePicture extends React.Component {
-  takePicture = () => {
-    const options = {};
-    // options.location = ...
-    this.camera
-      .capture({ metadata: options })
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
+  constructor(props) {
+    super(props);
+    this.camera = null;
+  }
+
+  state = {
+    loading: false,
+  };
+
+  takePicture = async () => {
+    if (this.camera) {
+      this.setState({ loading: true });
+      console.log(this.camera);
+      const options = { quality: 0.5, base64: true };
+      try {
+        const data = await this.camera.takePictureAsync(options);
+        console.log(data.base64);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.setState({ loading: false });
+      }
+    }
   };
 
   render() {
+    const { loading } = this.state;
     return (
       <Wrapper>
         <Camera
-          ref={cam => {
+          innerRef={cam => {
             this.camera = cam;
           }}
         >
           <TakePictureButton primary block onPress={this.takePicture}>
-            <Text> Take Picture </Text>
+            {loading ? <Spinner color="#fff" /> : <Text> Take Picture </Text>}
           </TakePictureButton>
         </Camera>
       </Wrapper>
