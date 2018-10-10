@@ -129,7 +129,7 @@ export default {
   inverseTextColor: '#fff',
   noteFontSize: 14,
   defaultTextColor: '#000',
-  titleFontfamily: 'Montserrat-Bold',
+  titleFontfamily: 'Montserrat-Regular',
   titleFontSize: 19,
   subTitleFontSize: 14,
   subtitleColor: '#FFF',

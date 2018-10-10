@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Spinner } from 'native-base';
+import { View } from 'react-native';
+import { Text, Spinner, H1, Icon } from 'native-base';
 
 // Styles
 import {
@@ -8,6 +9,18 @@ import {
   TakePictureButton,
 } from './styles/takePictureScreenStyles';
 
+const PendingView = () => (
+  <View
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <Icon name="camera" style={{ marginBottom: 20, fontSize: 52 }} />
+    <H1 style={{ fontFamily: 'Montserrat-Bold' }}>Waiting...</H1>
+  </View>
+);
 class TakePicture extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +55,8 @@ class TakePicture extends React.Component {
           innerRef={cam => {
             this.camera = cam;
           }}
+          notAuthorizedView={<PendingView />}
+          pendingAuthorizationView={<PendingView />}
         >
           <TakePictureButton primary block onPress={this.takePicture}>
             {loading ? <Spinner color="#fff" /> : <Text> Take Picture </Text>}
