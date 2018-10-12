@@ -34,13 +34,10 @@ class TakePicture extends React.Component {
   takePicture = async () => {
     if (this.camera) {
       this.setState({ loading: true });
-      console.log(this.camera);
       const options = { quality: 0.5, base64: true };
       try {
         const data = await this.camera.takePictureAsync(options);
-        console.log(data.base64);
       } catch (error) {
-        console.log(error);
       } finally {
         this.setState({ loading: false });
       }
