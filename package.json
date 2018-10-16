@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "apisauce": "^1.0.0",
+    "aws-amplify": "^1.1.6",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
     "lodash": "^4.17.11",
