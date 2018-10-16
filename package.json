@@ -28,6 +28,8 @@
   "dependencies": {
     "apisauce": "^1.0.0",
     "aws-amplify": "^1.1.6",
+    "aws-sdk": "^2.335.0",
+    "base-64": "^0.1.0",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
     "lodash": "^4.17.11",
