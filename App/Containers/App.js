@@ -2,6 +2,8 @@ import '../Config';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
+import Amplify from 'aws-amplify';
+import awsExports from 'Lib/aws-exports';
 
 import DebugConfig from '../Config/DebugConfig';
 import RootContainer from './RootContainer';
@@ -11,6 +13,8 @@ import getTheme from '../../native-base-theme/components';
 import cheffii from '../../native-base-theme/variables/cheffii';
 // create our store
 const store = createStore();
+
+Amplify.configure(awsExports);
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
