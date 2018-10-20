@@ -58,8 +58,12 @@ class TakePicture extends React.Component {
       },
     };
     try {
-      const { data } = await API.post('cheffii-api', '/rekognition', myInit);
-      return data;
+      const response = await API.post(
+        'cheffii-api-dev',
+        '/rekognition',
+        myInit,
+      );
+      return response;
     } catch (error) {
       throw error;
     }

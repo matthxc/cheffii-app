@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { StyleProvider } from 'native-base';
 import Amplify from 'aws-amplify';
-import awsExports from 'Lib/aws-exports';
+import awsExports from 'Config/aws-exports';
 
 import DebugConfig from '../Config/DebugConfig';
 import RootContainer from './RootContainer';
@@ -14,7 +14,17 @@ import cheffii from '../../native-base-theme/variables/cheffii';
 // create our store
 const store = createStore();
 
-Amplify.configure(awsExports);
+Amplify.configure({
+  ...awsExports,
+  API: {
+    endpoints: [
+      {
+        name: 'cheffii-api-dev',
+        endpoint: 'http://192.168.0.15:8080',
+      },
+    ],
+  },
+});
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
