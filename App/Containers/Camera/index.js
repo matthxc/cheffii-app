@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Text, Spinner, H1, Icon } from 'native-base';
-import base64 from 'base-64';
 import { API } from 'aws-amplify';
 
 // Styles
@@ -39,7 +38,8 @@ class TakePicture extends React.Component {
       const options = { quality: 0.2, base64: true };
       try {
         const { base64: image } = await this.camera.takePictureAsync(options);
-        await this.detectLabels(image);
+        const response = await this.detectLabels(image);
+        console.tron.log(response);
       } catch (error) {
         console.tron.log(error);
       } finally {
@@ -49,27 +49,20 @@ class TakePicture extends React.Component {
   };
 
   detectLabels = async bytes => {
-    const params = { Image: { Bytes: this.getBinary(bytes) } };
     const myInit = {
-      response: true,
+      body: {
+        image: bytes,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
     try {
-      const response = await API.get('cheffii-api', '/', myInit);
-      console.tron.log(response);
+      const { data } = await API.post('cheffii-api', '/rekognition', myInit);
+      return data;
     } catch (error) {
-      console.tron.log(error);
       throw error;
     }
-  };
-
-  getBinary = base64Image => {
-    const binaryString = base64.decode(base64Image);
-    const len = binaryString.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i += 1) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes.buffer;
   };
 
   render() {
