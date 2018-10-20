@@ -4,8 +4,6 @@ import { Button } from 'native-base';
 
 export const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Camera = styled(RNCamera)`
@@ -23,4 +21,5 @@ export const TakePictureButton = styled(Button)`
   margin-right: 30;
   left: 0;
   right: 0;
+  z-index: 1;
 `;

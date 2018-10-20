@@ -1,7 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Spinner, H1, Icon } from 'native-base';
+import { Text, H1, Icon } from 'native-base';
 import { API } from 'aws-amplify';
+
+// Components
+import ModalSpinner from 'Components/ModalSpinner';
 
 // Styles
 import {
@@ -30,11 +33,12 @@ class TakePicture extends React.Component {
 
   state = {
     loading: false,
+    statusMessage: '',
   };
 
   takePicture = async () => {
     if (this.camera) {
-      this.setState({ loading: true });
+      this.setState({ loading: true, statusMessage: 'Sending Picture' });
       const options = { quality: 0.2, base64: true };
       try {
         const { base64: image } = await this.camera.takePictureAsync(options);
@@ -57,6 +61,7 @@ class TakePicture extends React.Component {
         'Content-Type': 'application/json',
       },
     };
+    this.setState({ statusMessage: 'Processing image' });
     try {
       const response = await API.post(
         'cheffii-api-dev',
@@ -70,9 +75,10 @@ class TakePicture extends React.Component {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, statusMessage } = this.state;
     return (
       <Wrapper>
+        <ModalSpinner loading={loading} message={statusMessage} />
         <Camera
           innerRef={cam => {
             this.camera = cam;
@@ -80,8 +86,13 @@ class TakePicture extends React.Component {
           notAuthorizedView={<PendingView />}
           pendingAuthorizationView={<PendingView />}
         >
-          <TakePictureButton primary block onPress={this.takePicture}>
-            {loading ? <Spinner color="#fff" /> : <Text> Take Picture </Text>}
+          <TakePictureButton
+            primary
+            block
+            onPress={this.takePicture}
+            disabled={loading}
+          >
+            <Text> Take Picture </Text>
           </TakePictureButton>
         </Camera>
       </Wrapper>
