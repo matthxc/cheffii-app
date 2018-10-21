@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
-import { Spinner } from 'native-base';
-import _ from 'lodash';
+import { Spinner, Text } from 'native-base';
 import { Colors } from '../../Themes';
 import { AnimatableView, Container } from './Styles/styles';
 
@@ -52,7 +50,7 @@ class ModalSpinner extends React.PureComponent {
             animation={loading ? 'fadeInUp' : 'fadeOutDown'}
             duration={300}
           >
-            <Text>{message}</Text>
+            <Text style={{ fontFamily: 'Montserrat-Regular' }}>{message}</Text>
             <Spinner color={Colors.primary} />
           </AnimatableView>
         </Container>

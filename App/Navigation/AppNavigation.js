@@ -7,6 +7,7 @@ import colors from 'Themes/Colors';
 // Screens
 import LaunchScreen from 'Containers/LaunchScreen';
 import CameraScreen from 'Containers/Camera';
+import IngredientsListScreen from 'Containers/IngredientsList';
 
 // Components
 import NavTabIcon from './NavTabIcon';
@@ -108,12 +109,20 @@ const PrimaryNav = StackNavigator(
     main: {
       screen: MainApp,
     },
+    ingredientsList: {
+      screen: IngredientsListScreen,
+    },
   },
   {
     // Default config for all screens
     initialRouteName: 'main',
     navigationOptions: {
       headerTitle: <TabHeaderLogo />,
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: colors.primary,
+      },
+      headerTitleStyle: { color: 'white' },
     },
   },
 );

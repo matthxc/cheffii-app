@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Text, H1, Icon } from 'native-base';
 import { API } from 'aws-amplify';
+import { connect } from 'react-redux';
 
 // Components
 import ModalSpinner from 'Components/ModalSpinner';
+
+// Redux
+import { setIngredientsList } from 'Containers/IngredientsList/actions';
 
 // Styles
 import {
@@ -26,6 +31,11 @@ const PendingView = () => (
   </View>
 );
 class TakePicture extends React.Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    setIngredientsList: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.camera = null;
@@ -42,8 +52,9 @@ class TakePicture extends React.Component {
       const options = { quality: 0.2, base64: true };
       try {
         const { base64: image } = await this.camera.takePictureAsync(options);
-        const response = await this.detectLabels(image);
-        console.tron.log(response);
+        const { Labels } = await this.detectLabels(image);
+        this.props.setIngredientsList(Labels);
+        this.props.navigation.navigate('ingredientsList');
       } catch (error) {
         console.tron.log(error);
       } finally {
@@ -100,4 +111,11 @@ class TakePicture extends React.Component {
   }
 }
 
-export default TakePicture;
+const mapDispatchToProps = {
+  setIngredientsList,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(TakePicture);
